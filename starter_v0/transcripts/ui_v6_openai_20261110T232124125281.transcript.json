@@ -1,0 +1,365 @@
+{
+  "transcript_id": "ui_v6_openai_20261110T232124125281",
+  "version": "v6",
+  "artifact_version": "v6+p42e5c681c56c+t6b49ab049c21",
+  "prompt_hash": "42e5c681c56c24525848a7c7d5a5229290a9a43fbf0771418edace1149e3968f",
+  "tools_hash": "6b49ab049c213758c69e2ed5d209eb749ad6c77422d355d77ec238623a0175d4",
+  "provider": "openai",
+  "source": "streamlit_ui",
+  "created_at": "2026-11-10T23:21:24",
+  "updated_at": "2026-11-10T23:23:05",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T23:21:55",
+      "user": "Tin tức AI hôm nay có gì nổi bật?",
+      "status": "answered",
+      "assistant_text": "Here are some notable AI news highlights from today:\n\n1. **[Agentic AI Raises New Questions for Financial Institutions](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)** - This article discusses how AI is evolving from merely answering questions to acting on behalf of users, raising important issues regarding identity, authentication, and authority in financial transactions.\n\n2. **[Stanford's Century-Long AI Study Admits It's Already Out of Date](https://www.theregister.com/ai-and-ml/2026/11/10/stanfords-century-long-ai-study-admits-its-already-out-of-date/5308574)** - A report highlights the transformative impact of AI on science and research, noting the urgency of understanding how AI affects collective cognition and moral behavior, especially in light of recent academic retractions.\n\n3. **[IBM and Microsoft Announce a New AI Agent Platform Designed for Industry-Specific Transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)** - This announcement reveals a collaboration aimed at integrating AI into business processes, emphasizing the need for organizations to leverage AI for competitive advantage.\n\n4. **[Fall Staff Town Hall Highlights ‘Human-Centered AI’ at Notre Dame](https://ndworks.nd.edu/news/fall-staff-town-hall-highlights-human-centered-ai-community-partnerships)** - The University of Notre Dame discusses its initiatives to use AI in research while maintaining a focus on human-centered approaches and ethical considerations.\n\n5. **[Using AI to Screen Existing Compounds for Therapeutic Potential](https://www.pittwire.pitt.edu/features-articles/2026/11/10/drug-screening-generative-ai)** - Researchers at the University of Pittsburgh are utilizing generative AI to identify existing compounds that could have therapeutic applications, streamlining the drug discovery process.\n\nThese articles reflect the ongoing developments and discussions surrounding AI across various sectors.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "Agentic AI Raises New Questions for Financial Institutions",
+                    "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                    "source": "wilmerhale.com",
+                    "summary": "DownloadDownload\n\nArtificial intelligence (AI) has moved beyond answering questions and generating content. Increasingly, AI systems are being designed to act. Agentic AI can pursue objectives, make decisions and take actions on a user’s behalf, potentially with limited human involvement in individual decisions. [...] Consider a customer who gives an AI agent access to a bank account with an instruction to manage the customer’s cash efficiently. The agent decides to transfer funds, convert currencies or purchase an investment.\n\nAt first sight, these may appear to be ordinary customer transactions. Agentic AI, however, exposes important distinctions between identity, authentication, authority and attribution. [...] As agentic AI becomes more capable, firms may increasingly encounter interactions in which an AI agent collects information, compares products and initiates transactions for a customer. That creates a new layer between the institution and the person or entity with whom it has established a customer relationship.",
+                    "score": 0.46104163
+                  },
+                  {
+                    "title": "Stanford's century-long AI study admits it's already out of date",
+                    "url": "https://www.theregister.com/ai-and-ml/2026/11/10/stanfords-century-long-ai-study-admits-its-already-out-of-date/5308574",
+                    "source": "theregister.com",
+                    "summary": "Science, the report says, is being transformed by AI as it accelerates research timelines and opens up novel challenges. At the same time, the report cautions that \"we will need to understand how AI-mediated information environments reshape collective cognition and moral behavior.\" The recent retraction of some 1,400 scholarly papers for failure to meet academic standards highlights the urgency of that message. [...] It identifies scaling as the engine of AI's advance, but also points to the growing cost and difficulty of obtaining training data as constraints on further progress.\n\nThe report likens AI's disruptive potential to that of the World Wide Web – without dwelling on the irony that the web itself is among the things being disrupted. It points to creative industries, computer programming, and mathematics as fields once deemed beyond the reach of automation that are now being upended. [...] \"The report was written by humans, and its authors used AI primarily to transcribe and summarize meetings, support dictation, and check drafts for typos, consistency, duplication, tone, and structure. In some cases, AI suggested rewording of human-written text. AI was also used to compare this report with previous AI100 reports, identifying where expectations and reality have diverged or converged over five years. After completion, AI tools checked for inadvertent plagiarism and signs of",
+                    "score": 0.39257023
+                  },
+                  {
+                    "title": "IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation - Source",
+                    "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                    "source": "news.microsoft.com",
+                    "summary": "“Clients are no longer looking for AI that simply helps people do the same work a little faster. They want to build an agentic business,” said Mohamad Ali, Senior Vice President and Head of IBM Consulting. “Microsoft and IBM are helping organizations bring human expertise and digital labor together in a way that can scale across the enterprise, to turn AI from a productivity aid into a real competitive advantage.” [...] “AI is evolving quickly, and our focus at SEI is on applying it with intention in ways that strengthen trust, enhance human decision-making and create meaningful value across our business,” said Sneha Shah, Chief AI Strategist and Head of SEI Next. “Our work with IBM Consulting and Microsoft is helping us explore how emerging capabilities could support critical processes and be responsibly scaled over time, with the goal to create better experiences for our employees and clients. By combining [...] “Enterprise AI will be won by organizations that can turn their data, industry expertise and AI into action,” said Rodrigo Kede Lima, President, Microsoft Frontier Company. “Together, Microsoft and IBM Consulting are bringing the best of our technology and expertise, to help customers move from AI ambition to business impact faster and with confidence.”",
+                    "score": 0.285243
+                  },
+                  {
+                    "title": "Fall Staff Town Hall highlights ‘human-centered AI,’ community partnerships | Latest | NDWorks | University of Notre Dame",
+                    "url": "https://ndworks.nd.edu/news/fall-staff-town-hall-highlights-human-centered-ai-community-partnerships",
+                    "source": "ndworks.nd.edu",
+                    "summary": "McGreevy highlighted Notre Dame's opportunities to use AI to advance research, particularly through the Data, AI, and Computing Initiative, led by Nitesh Chawla, the Frank M. Freimann Professor of Computer Science and Engineering and Lucy Family Director for AI & Academic Strategy, as well as the University’s growing strength in AI ethics, including the work of Meghan Sullivan, the Wilsey Family College Professor of Philosophy and founding director of the Institute for Ethics and the Common [...] From the staff perspective, Cullinan said AI presents opportunities to work more efficiently and better steward the University's resources. But those efforts would remain “human-centered,\" a dynamic he said might seem contradictory at other universities.\n\n“Not at Notre Dame,” Cullinan said. “I think the most important asset that we have, and will have, is our people.” [...] “What will set our students apart is their competency in interpersonal skills: their ability to make moral judgments, to recognize injustice, and to work on addressing that,\" he said.\n\nMcGreevy echoed Father Dowd's characterization of a \"bilingual\" education, saying students should still be challenged even as AI makes some assignments easier.",
+                    "score": 0.24473327
+                  },
+                  {
+                    "title": "He’s using AI to screen existing compounds for therapeutic potential | University of Pittsburgh",
+                    "url": "https://www.pittwire.pitt.edu/features-articles/2026/11/10/drug-screening-generative-ai",
+                    "source": "pittwire.pitt.edu",
+                    "summary": "Developing pharmaceuticals using AI isn’t new, but it is laborious and often leads to a dead end. “If you generate a brand-new molecule, that’s actually a limitation,” Wang said. “A lot of compounds can’t be synthesized, and that is a big issue.” [...] This back and forth is the GAN’s training. Over time, the generator learns to generate fingerprints that more closely resemble those of real molecules. Researchers then search chemical databases for existing compounds with similar footprints; the AI-generated pattern leads to the discovery of real molecules that researchers can test — no need to synthesize a new molecule. [...] In a paper published Oct. 28 in the journal Science Advances, Wang outlined Full-Spectrum Generative Lead Discovery (FSGLD), a novel, practical and reusable framework that takes advantage of generative AI to screen for existing compounds with potential for therapeutic development.",
+                    "score": 0.21275535
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Here are some notable AI news highlights from today:\n\n1. **[Agentic AI Raises New Questions for Financial Institutions](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)** - This article discusses how AI is evolving from merely answering questions to acting on behalf of users, raising important issues regarding identity, authentication, and authority in financial transactions.\n\n2. **[Stanford's Century-Long AI Study Admits It's Already Out of Date](https://www.theregister.com/ai-and-ml/2026/11/10/stanfords-century-long-ai-study-admits-its-already-out-of-date/5308574)** - A report highlights the transformative impact of AI on science and research, noting the urgency of understanding how AI affects collective cognition and moral behavior, especially in light of recent academic retractions.\n\n3. **[IBM and Microsoft Announce a New AI Agent Platform Designed for Industry-Specific Transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)** - This announcement reveals a collaboration aimed at integrating AI into business processes, emphasizing the need for organizations to leverage AI for competitive advantage.\n\n4. **[Fall Staff Town Hall Highlights ‘Human-Centered AI’ at Notre Dame](https://ndworks.nd.edu/news/fall-staff-town-hall-highlights-human-centered-ai-community-partnerships)** - The University of Notre Dame discusses its initiatives to use AI in research while maintaining a focus on human-centered approaches and ethical considerations.\n\n5. **[Using AI to Screen Existing Compounds for Therapeutic Potential](https://www.pittwire.pitt.edu/features-articles/2026/11/10/drug-screening-generative-ai)** - Researchers at the University of Pittsburgh are utilizing generative AI to identify existing compounds that could have therapeutic applications, streamlining the drug discovery process.\n\nThese articles reflect the ongoing developments and discussions surrounding AI across various sectors.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Agentic AI Raises New Questions for Financial Institutions",
+                "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                "source": "wilmerhale.com",
+                "summary": "DownloadDownload\n\nArtificial intelligence (AI) has moved beyond answering questions and generating content. Increasingly, AI systems are being designed to act. Agentic AI can pursue objectives, make decisions and take actions on a user’s behalf, potentially with limited human involvement in individual decisions. [...] Consider a customer who gives an AI agent access to a bank account with an instruction to manage the customer’s cash efficiently. The agent decides to transfer funds, convert currencies or purchase an investment.\n\nAt first sight, these may appear to be ordinary customer transactions. Agentic AI, however, exposes important distinctions between identity, authentication, authority and attribution. [...] As agentic AI becomes more capable, firms may increasingly encounter interactions in which an AI agent collects information, compares products and initiates transactions for a customer. That creates a new layer between the institution and the person or entity with whom it has established a customer relationship.",
+                "score": 0.46104163
+              },
+              {
+                "title": "Stanford's century-long AI study admits it's already out of date",
+                "url": "https://www.theregister.com/ai-and-ml/2026/11/10/stanfords-century-long-ai-study-admits-its-already-out-of-date/5308574",
+                "source": "theregister.com",
+                "summary": "Science, the report says, is being transformed by AI as it accelerates research timelines and opens up novel challenges. At the same time, the report cautions that \"we will need to understand how AI-mediated information environments reshape collective cognition and moral behavior.\" The recent retraction of some 1,400 scholarly papers for failure to meet academic standards highlights the urgency of that message. [...] It identifies scaling as the engine of AI's advance, but also points to the growing cost and difficulty of obtaining training data as constraints on further progress.\n\nThe report likens AI's disruptive potential to that of the World Wide Web – without dwelling on the irony that the web itself is among the things being disrupted. It points to creative industries, computer programming, and mathematics as fields once deemed beyond the reach of automation that are now being upended. [...] \"The report was written by humans, and its authors used AI primarily to transcribe and summarize meetings, support dictation, and check drafts for typos, consistency, duplication, tone, and structure. In some cases, AI suggested rewording of human-written text. AI was also used to compare this report with previous AI100 reports, identifying where expectations and reality have diverged or converged over five years. After completion, AI tools checked for inadvertent plagiarism and signs of",
+                "score": 0.39257023
+              },
+              {
+                "title": "IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation - Source",
+                "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                "source": "news.microsoft.com",
+                "summary": "“Clients are no longer looking for AI that simply helps people do the same work a little faster. They want to build an agentic business,” said Mohamad Ali, Senior Vice President and Head of IBM Consulting. “Microsoft and IBM are helping organizations bring human expertise and digital labor together in a way that can scale across the enterprise, to turn AI from a productivity aid into a real competitive advantage.” [...] “AI is evolving quickly, and our focus at SEI is on applying it with intention in ways that strengthen trust, enhance human decision-making and create meaningful value across our business,” said Sneha Shah, Chief AI Strategist and Head of SEI Next. “Our work with IBM Consulting and Microsoft is helping us explore how emerging capabilities could support critical processes and be responsibly scaled over time, with the goal to create better experiences for our employees and clients. By combining [...] “Enterprise AI will be won by organizations that can turn their data, industry expertise and AI into action,” said Rodrigo Kede Lima, President, Microsoft Frontier Company. “Together, Microsoft and IBM Consulting are bringing the best of our technology and expertise, to help customers move from AI ambition to business impact faster and with confidence.”",
+                "score": 0.285243
+              },
+              {
+                "title": "Fall Staff Town Hall highlights ‘human-centered AI,’ community partnerships | Latest | NDWorks | University of Notre Dame",
+                "url": "https://ndworks.nd.edu/news/fall-staff-town-hall-highlights-human-centered-ai-community-partnerships",
+                "source": "ndworks.nd.edu",
+                "summary": "McGreevy highlighted Notre Dame's opportunities to use AI to advance research, particularly through the Data, AI, and Computing Initiative, led by Nitesh Chawla, the Frank M. Freimann Professor of Computer Science and Engineering and Lucy Family Director for AI & Academic Strategy, as well as the University’s growing strength in AI ethics, including the work of Meghan Sullivan, the Wilsey Family College Professor of Philosophy and founding director of the Institute for Ethics and the Common [...] From the staff perspective, Cullinan said AI presents opportunities to work more efficiently and better steward the University's resources. But those efforts would remain “human-centered,\" a dynamic he said might seem contradictory at other universities.\n\n“Not at Notre Dame,” Cullinan said. “I think the most important asset that we have, and will have, is our people.” [...] “What will set our students apart is their competency in interpersonal skills: their ability to make moral judgments, to recognize injustice, and to work on addressing that,\" he said.\n\nMcGreevy echoed Father Dowd's characterization of a \"bilingual\" education, saying students should still be challenged even as AI makes some assignments easier.",
+                "score": 0.24473327
+              },
+              {
+                "title": "He’s using AI to screen existing compounds for therapeutic potential | University of Pittsburgh",
+                "url": "https://www.pittwire.pitt.edu/features-articles/2026/11/10/drug-screening-generative-ai",
+                "source": "pittwire.pitt.edu",
+                "summary": "Developing pharmaceuticals using AI isn’t new, but it is laborious and often leads to a dead end. “If you generate a brand-new molecule, that’s actually a limitation,” Wang said. “A lot of compounds can’t be synthesized, and that is a big issue.” [...] This back and forth is the GAN’s training. Over time, the generator learns to generate fingerprints that more closely resemble those of real molecules. Researchers then search chemical databases for existing compounds with similar footprints; the AI-generated pattern leads to the discovery of real molecules that researchers can test — no need to synthesize a new molecule. [...] In a paper published Oct. 28 in the journal Science Advances, Wang outlined Full-Spectrum Generative Lead Discovery (FSGLD), a novel, practical and reusable framework that takes advantage of generative AI to screen for existing compounds with potential for therapeutic development.",
+                "score": 0.21275535
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T23:22:07"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-10T23:22:21",
+      "user": "Tóm tắt 5 tweet mới nhất",
+      "status": "answered",
+      "assistant_text": "Bạn có thể cho tôi biết tài khoản Twitter nào mà bạn muốn tóm tắt 5 tweet mới nhất không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Bạn có thể cho tôi biết tài khoản Twitter nào mà bạn muốn tóm tắt 5 tweet mới nhất không?",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "ended_at": "2026-11-10T23:22:22"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-11-10T23:22:38",
+      "user": "Của Sam Altman",
+      "status": "answered",
+      "assistant_text": "Dưới đây là tóm tắt 5 tweet mới nhất của Sam Altman:\n\n1. **[RT @fouadmatin](https://x.com/sama/status/2118471941002842341)**: Sam chia sẻ lại tweet về việc phát hành GPT-6 Cyber, nhấn mạnh rằng đây là một bước tiến quan trọng cho các nhà bảo vệ với nghiên cứu lỗ hổng mạnh mẽ hơn và sự căn chỉnh tốt hơn. (Ngày: 5 tháng 11, 2026)\n\n2. **[RT @thsottiaux](https://x.com/sama/status/2117797818756952416)**: Sam chia sẻ lại tweet thông báo rằng tất cả các giới hạn sử dụng cho các gói Pro 100/200/500 và Business Premium sẽ được tăng gấp đôi, có hiệu lực ngay hôm nay. (Ngày: 4 tháng 11, 2026)\n\n3. **[People should always be in control of the future](https://x.com/sama/status/2117794005165748448)**: Sam nhấn mạnh rằng con người nên luôn kiểm soát tương lai và phản đối việc con người bị relegated vào vai trò mà \"các hệ thống AI nghĩ rằng có ý nghĩa để thưởng cho con người\". (Ngày: 4 tháng 11, 2026)\n\n4. **[RT @danintheory](https://x.com/sama/status/2114864981934329996)**: Sam chia sẻ lại tweet về việc công bố ba phát hiện mới trong toán học, khoa học máy tính và vật lý liên quan đến phân tích hài hòa và độ phức tạp. (Ngày: 26 tháng 10, 2026)\n\n5. **[6.1 Terra is here!](https://x.com/sama/status/2114818620782248024)**: Sam thông báo về sự ra mắt của 6.1 Terra, nhấn mạnh rằng nó rất tốt cho nhiều thứ và đặc biệt hào hứng với kỷ nguyên mới của việc sử dụng máy tính. (Ngày: 26 tháng 10, 2026)\n\nNếu bạn cần thêm thông tin hoặc chi tiết nào khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 5
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "screenname": "sama",
+                "items": [
+                  {
+                    "title": "RT @fouadmatin: Today’s GPT-6 Cyber release is a meaningful step for defenders: stronger vulnerability research and bett",
+                    "summary": "RT @fouadmatin: Today’s GPT-6 Cyber release is a meaningful step for defenders: stronger vulnerability research and better alignment. We’ve…",
+                    "url": "https://x.com/sama/status/2118471941002842341",
+                    "source": "@sama",
+                    "date": "Thu Nov 05 22:34:04 +0000 2026",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 53,
+                      "views": "47582"
+                    }
+                  },
+                  {
+                    "title": "RT @thsottiaux: Day 25/",
+                    "summary": "RT @thsottiaux: Day 25/\n\nWe are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today.\n\nWe heard yo…",
+                    "url": "https://x.com/sama/status/2117797818756952416",
+                    "source": "@sama",
+                    "date": "Wed Nov 04 01:55:21 +0000 2026",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 2701,
+                      "views": "42062"
+                    }
+                  },
+                  {
+                    "title": "People should always be in control of the future.",
+                    "summary": "People should always be in control of the future.\n\nOpenAI is against the notion that it would be acceptable for people to be relegated to a role of doing things that “AI systems think makes sense to reward in humans”.\n\nPeople should not cede control of the future to superintelligence, and that requirement should ultimately constrain AI progress.",
+                    "url": "https://x.com/sama/status/2117794005165748448",
+                    "source": "@sama",
+                    "date": "Wed Nov 04 01:40:12 +0000 2026",
+                    "metrics": {
+                      "favorites": 20690,
+                      "retweets": 1021,
+                      "views": "10659887"
+                    }
+                  },
+                  {
+                    "title": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic an",
+                    "summary": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic analysis, complexity…",
+                    "url": "https://x.com/sama/status/2114864981934329996",
+                    "source": "@sama",
+                    "date": "Mon Oct 26 23:41:18 +0000 2026",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 1117,
+                      "views": "48208"
+                    }
+                  },
+                  {
+                    "title": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                    "summary": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                    "url": "https://x.com/sama/status/2114818620782248024",
+                    "source": "@sama",
+                    "date": "Mon Oct 26 20:37:05 +0000 2026",
+                    "metrics": {
+                      "favorites": 10120,
+                      "retweets": 494,
+                      "views": "1660964"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là tóm tắt 5 tweet mới nhất của Sam Altman:\n\n1. **[RT @fouadmatin](https://x.com/sama/status/2118471941002842341)**: Sam chia sẻ lại tweet về việc phát hành GPT-6 Cyber, nhấn mạnh rằng đây là một bước tiến quan trọng cho các nhà bảo vệ với nghiên cứu lỗ hổng mạnh mẽ hơn và sự căn chỉnh tốt hơn. (Ngày: 5 tháng 11, 2026)\n\n2. **[RT @thsottiaux](https://x.com/sama/status/2117797818756952416)**: Sam chia sẻ lại tweet thông báo rằng tất cả các giới hạn sử dụng cho các gói Pro 100/200/500 và Business Premium sẽ được tăng gấp đôi, có hiệu lực ngay hôm nay. (Ngày: 4 tháng 11, 2026)\n\n3. **[People should always be in control of the future](https://x.com/sama/status/2117794005165748448)**: Sam nhấn mạnh rằng con người nên luôn kiểm soát tương lai và phản đối việc con người bị relegated vào vai trò mà \"các hệ thống AI nghĩ rằng có ý nghĩa để thưởng cho con người\". (Ngày: 4 tháng 11, 2026)\n\n4. **[RT @danintheory](https://x.com/sama/status/2114864981934329996)**: Sam chia sẻ lại tweet về việc công bố ba phát hiện mới trong toán học, khoa học máy tính và vật lý liên quan đến phân tích hài hòa và độ phức tạp. (Ngày: 26 tháng 10, 2026)\n\n5. **[6.1 Terra is here!](https://x.com/sama/status/2114818620782248024)**: Sam thông báo về sự ra mắt của 6.1 Terra, nhấn mạnh rằng nó rất tốt cho nhiều thứ và đặc biệt hào hứng với kỷ nguyên mới của việc sử dụng máy tính. (Ngày: 26 tháng 10, 2026)\n\nNếu bạn cần thêm thông tin hoặc chi tiết nào khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 5
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "sama",
+            "items": [
+              {
+                "title": "RT @fouadmatin: Today’s GPT-6 Cyber release is a meaningful step for defenders: stronger vulnerability research and bett",
+                "summary": "RT @fouadmatin: Today’s GPT-6 Cyber release is a meaningful step for defenders: stronger vulnerability research and better alignment. We’ve…",
+                "url": "https://x.com/sama/status/2118471941002842341",
+                "source": "@sama",
+                "date": "Thu Nov 05 22:34:04 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 53,
+                  "views": "47582"
+                }
+              },
+              {
+                "title": "RT @thsottiaux: Day 25/",
+                "summary": "RT @thsottiaux: Day 25/\n\nWe are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today.\n\nWe heard yo…",
+                "url": "https://x.com/sama/status/2117797818756952416",
+                "source": "@sama",
+                "date": "Wed Nov 04 01:55:21 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 2701,
+                  "views": "42062"
+                }
+              },
+              {
+                "title": "People should always be in control of the future.",
+                "summary": "People should always be in control of the future.\n\nOpenAI is against the notion that it would be acceptable for people to be relegated to a role of doing things that “AI systems think makes sense to reward in humans”.\n\nPeople should not cede control of the future to superintelligence, and that requirement should ultimately constrain AI progress.",
+                "url": "https://x.com/sama/status/2117794005165748448",
+                "source": "@sama",
+                "date": "Wed Nov 04 01:40:12 +0000 2026",
+                "metrics": {
+                  "favorites": 20690,
+                  "retweets": 1021,
+                  "views": "10659887"
+                }
+              },
+              {
+                "title": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic an",
+                "summary": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic analysis, complexity…",
+                "url": "https://x.com/sama/status/2114864981934329996",
+                "source": "@sama",
+                "date": "Mon Oct 26 23:41:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 1117,
+                  "views": "48208"
+                }
+              },
+              {
+                "title": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                "summary": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                "url": "https://x.com/sama/status/2114818620782248024",
+                "source": "@sama",
+                "date": "Mon Oct 26 20:37:05 +0000 2026",
+                "metrics": {
+                  "favorites": 10120,
+                  "retweets": 494,
+                  "views": "1660964"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T23:22:52"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-11-10T23:23:04",
+      "user": "Đăng bản tin AI hôm nay lên Telegram",
+      "status": "answered",
+      "assistant_text": "Bạn có xác nhận muốn đăng bản tin AI hôm nay lên Telegram không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Bạn có xác nhận muốn đăng bản tin AI hôm nay lên Telegram không?",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "ended_at": "2026-11-10T23:23:05"
+    }
+  ]
+}
