@@ -4,7 +4,7 @@
 
 * Tên nhóm: MeoConSatThu
 * Lớp: L3A
-* Repo nhóm: https://github.com/devouring-blade/K5-L3A-DAY03-MeoConSatThu-Prompt-Function-Calling-Tool-Design-MCP
+* Repo nhóm: https://github.com/devouring-blade/K5-L3A-DAY03-MeoConSatThu-ResearchAgentToolEval
 * Nhánh nộp: main
 * Commit chốt: 358f074
 
