@@ -1,4 +1,4 @@
-"""TODO(student): Tool Unit Test Challenge.
+"""TODO CP3 (student): Tool Unit Test Challenge.
 
 Each test below is a stub. Replace `pytest.skip(...)` with a real test.
 Patterns to copy are in test_tools_examples.py. Fixtures are in conftest.py.
@@ -15,7 +15,7 @@ import pytest
 from conftest import FakeResponse  # noqa: F401  (you will need it)
 from tools import TOOL_FUNCTIONS  # noqa: F401
 
-TODO = "TODO(student): implement this test"
+TODO = "TODO CP3 (student): implement this test"
 
 
 # ---------------- clarify ----------------
