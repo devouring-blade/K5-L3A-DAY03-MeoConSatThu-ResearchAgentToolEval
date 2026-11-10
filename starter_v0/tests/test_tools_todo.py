@@ -110,13 +110,39 @@ def test_policy_instruction_like_lines_go_to_untrusted_text() -> None:
 #   2. bad / missing input from the model (empty string, wrong type, out-of-enum value)
 #   3. failure path (missing key, HTTP error, timeout) -> returns error dict, does not raise
 
-def test_my_new_tool_happy_path() -> None:
-    pytest.skip(TODO)
+def test_hn_search_sends_query_and_maps_hits(fake_http) -> None:
+    calls = fake_http(FakeResponse({"hits": [
+        {"objectID": "1", "title": "LLM paper", "url": "https://example.com/a", "points": 120, "num_comments": 30, "created_at": "2026-11-10"},
+        {"objectID": "2", "title": "Ask HN: LLM tips", "url": None, "points": 5, "num_comments": 2, "created_at": "2026-11-09"},
+    ]}))
+    result = TOOL_FUNCTIONS["hn_search"](query="LLM", limit=2)
+
+    assert calls[0]["url"] == "https://hn.algolia.com/api/v1/search"
+    assert calls[0]["params"] == {"query": "LLM", "tags": "story", "hitsPerPage": 2}
+    assert result["items"][0]["url"] == "https://example.com/a"
+    assert result["items"][0]["summary"] == "120 points, 30 comments"
+    assert result["items"][1]["url"] == "https://news.ycombinator.com/item?id=2"
 
 
-def test_my_new_tool_bad_input_from_model() -> None:
-    pytest.skip(TODO)
+def test_hn_search_empty_query_returns_error_without_request(fake_http) -> None:
+    calls = fake_http(FakeResponse({"hits": []}))
+    result = TOOL_FUNCTIONS["hn_search"](query="   ")
+
+    assert result["error"] == "ValueError"
+    assert calls == []
 
 
-def test_my_new_tool_failure_returns_error_dict() -> None:
-    pytest.skip(TODO)
+def test_hn_search_bad_limit_from_model_is_clamped(fake_http) -> None:
+    calls = fake_http(FakeResponse({"hits": []}))
+    TOOL_FUNCTIONS["hn_search"](query="Rust", limit="abc")
+    TOOL_FUNCTIONS["hn_search"](query="Rust", limit=0)
+    TOOL_FUNCTIONS["hn_search"](query="Rust", limit=999)
+
+    assert [c["params"]["hitsPerPage"] for c in calls] == [5, 1, 20]
+
+
+def test_hn_search_http_error_returns_error_dict(fake_http) -> None:
+    fake_http(FakeResponse(status_code=503))
+    result = TOOL_FUNCTIONS["hn_search"](query="LLM")
+
+    assert result["error"] == "HTTPError"

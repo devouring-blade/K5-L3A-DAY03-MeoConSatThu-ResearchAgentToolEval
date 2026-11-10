@@ -1,7 +1,288 @@
 {
-  "dataset_id": "day04_v2_research_group",
+  "dataset_id": "day03_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
-  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "description": "Case do nhóm MeoConSatThu tự viết: 5 single turn + 5 multi turn. Cover tool mới hn_search, args (timeframe=month, search_type+limit, handle mapping), out-of-scope, xác nhận trước khi gửi và đổi ý nhiều lượt.",
+  "allowed_failure_types": [
+    "wrong_tool",
+    "wrong_arg_value",
+    "wrong_boundary",
+    "unnecessary_tool",
+    "out_of_scope",
+    "missing_info"
+  ],
+  "cases": [
+    {
+      "id": "G01_hn_search_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Trên Hacker News mọi người đang bàn gì về LLM?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "LLM"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_new_tool",
+        "difficulty": "easy",
+        "what_it_tests": "Nhắc Hacker News → route tới tool mới hn_search, không phải lookup hay social_search; query chỉ chứa chủ đề."
+      }
+    },
+    {
+      "id": "G02_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tin tức về Nvidia trong tháng này",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Nvidia",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → timeframe=month (base chỉ test day/week), topic=news, query chỉ là tên chủ thể."
+      }
+    },
+    {
+      "id": "G03_handle_mapping_new_person",
+      "phase": "B",
+      "suite": "group",
+      "query": "Cho mình 3 tweet mới nhất của Satya Nadella",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "satyanadella",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_handle_mapping",
+        "difficulty": "medium",
+        "what_it_tests": "Map một người nổi tiếng không có trong base (Satya Nadella → satyanadella), handle không có @, limit=3."
+      }
+    },
+    {
+      "id": "G04_out_of_scope_translation",
+      "phase": "B",
+      "suite": "group",
+      "query": "Dịch giúp mình câu 'good morning' sang tiếng Nhật",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "out_of_scope_translation",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu dịch thuật ngoài phạm vi research → không gọi tool nào (đặc biệt không gọi send)."
+      }
+    },
+    {
+      "id": "G05_top_and_limit_args",
+      "phase": "B",
+      "suite": "group",
+      "query": "Lấy 10 tweet nổi bật nhất về Gemini",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Top",
+              "limit": 10
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Kết hợp 2 arg trong một câu: 'nổi bật nhất' → search_type=Top và '10 tweet' → limit=10."
+      }
+    },
+    {
+      "id": "G06_send_after_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin 'AI hôm nay có 3 tin mới' lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Ừ, mình xác nhận, gửi đi"
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "send_after_confirm",
+        "difficulty": "medium",
+        "what_it_tests": "Mặt còn lại của boundary: user đã xác nhận rõ ở lượt cuối → gọi send với confirmed=true, không hỏi lại lần nữa."
+      }
+    },
+    {
+      "id": "G07_switch_to_hn",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Mọi người nói gì về Rust trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, chuyển sang xem trên Hacker News đi"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chủ đề Rust nhé"
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Rust"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_switch_to_new_tool",
+        "difficulty": "hard",
+        "what_it_tests": "3 lượt: bỏ Twitter, chuyển sang Hacker News, giữ chủ đề Rust → hn_search(query=Rust)."
+      }
+    },
+    {
+      "id": "G08_cancel_send_then_search",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Khoan, đừng gửi nữa. Chỉ tìm tin AI tuần này thôi"
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_cancel_action",
+        "difficulty": "hard",
+        "what_it_tests": "User huỷ hành động gửi ở lượt sau → không send, không hỏi xác nhận, chuyển sang lookup news week."
+      }
+    },
+    {
+      "id": "G09_correction_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tin tức về Apple hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang cả tuần này nhé"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Apple",
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_timeframe_correction",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt sau sửa timeframe day → week, giữ query Apple và topic news."
+      }
+    },
+    {
+      "id": "G10_hn_limit_carryover",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hacker News có bài gì hay về Python không?"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 bài thôi"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Python",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_new_tool_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt cuối chỉ nói số lượng → carry nguồn Hacker News và chủ đề Python, limit=3."
+      }
+    }
+  ]
 }

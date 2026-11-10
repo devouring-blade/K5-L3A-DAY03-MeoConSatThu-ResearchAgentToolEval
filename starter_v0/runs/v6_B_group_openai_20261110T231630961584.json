@@ -1,0 +1,1001 @@
+{
+  "run_id": "v6_B_group_openai_20261110T231630961584",
+  "version": "v6",
+  "artifact_version": "v6+p42e5c681c56c+t6b49ab049c21",
+  "prompt_hash": "42e5c681c56c24525848a7c7d5a5229290a9a43fbf0771418edace1149e3968f",
+  "tools_hash": "6b49ab049c213758c69e2ed5d209eb749ad6c77422d355d77ec238623a0175d4",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "system_prompt": "E:\\Work_Space\\K5-L3A-DAY03-MeoConSatThu-Prompt-Function-Calling-Tool-Design-MCP\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "E:\\Work_Space\\K5-L3A-DAY03-MeoConSatThu-Prompt-Function-Calling-Tool-Design-MCP\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day03_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do nhóm MeoConSatThu tự viết: 5 single turn + 5 multi turn. Cover tool mới hn_search, args (timeframe=month, search_type+limit, handle mapping), out-of-scope, xác nhận trước khi gửi và đổi ý nhiều lượt.",
+  "generated_at": "2026-11-10T23:16:30",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_hn_search_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool",
+        "difficulty": "easy",
+        "what_it_tests": "Nhắc Hacker News → route tới tool mới hn_search, không phải lookup hay social_search; query chỉ chứa chủ đề."
+      },
+      "input": "Trên Hacker News mọi người đang bàn gì về LLM?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "LLM"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "LLM"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hn_search",
+          "args": {
+            "query": "LLM"
+          },
+          "result": {
+            "tool": "hn_search",
+            "query": "LLM",
+            "items": [
+              {
+                "title": "LLM Inevitabilism",
+                "url": "https://tomrenner.com/posts/llm-inevitabilism/",
+                "source": "news.ycombinator.com",
+                "summary": "1773 points, 1628 comments",
+                "date": "2025-07-15T04:35:35Z"
+              },
+              {
+                "title": "Learning to Reason with LLMs",
+                "url": "https://openai.com/index/learning-to-reason-with-llms/",
+                "source": "news.ycombinator.com",
+                "summary": "1654 points, 1261 comments",
+                "date": "2024-09-12T17:08:46Z"
+              },
+              {
+                "title": "LLM Visualization",
+                "url": "https://bbycroft.net/llm",
+                "source": "news.ycombinator.com",
+                "summary": "1592 points, 131 comments",
+                "date": "2023-12-03T06:08:29Z"
+              },
+              {
+                "title": "LLMs reward expertise",
+                "url": "https://www.seangoedecke.com/llms-reward-expertise/",
+                "source": "news.ycombinator.com",
+                "summary": "1416 points, 573 comments",
+                "date": "2026-08-03T21:13:53Z"
+              },
+              {
+                "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL",
+                "url": "https://arxiv.org/abs/2501.12948",
+                "source": "news.ycombinator.com",
+                "summary": "1351 points, 1056 comments",
+                "date": "2025-01-25T18:39:49Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → timeframe=month (base chỉ test day/week), topic=news, query chỉ là tên chủ thể."
+      },
+      "input": "Tin tức về Nvidia trong tháng này",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Nvidia",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Nvidia",
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Statement From NVIDIA Board of Directors | NVIDIA Newsroom",
+                "url": "https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors",
+                "source": "nvidianews.nvidia.com",
+                "summary": "Get Involved\n\n Forums\n Careers\n Developer Home\n Join the Developer Program\n NVIDIA Partner Network\n NVIDIA Inception\n Resources for Venture Capitalists\n Venture Capital (NVentures)\n Technical Training\n Training for IT Professionals\n Professional Services for Data Science\n\nNews & Events\n\n Newsroom\n NVIDIA Blog\n NVIDIA Technical Blog\n Webinars\n Stay Informed\n Events Calendar\n NVIDIA GTC\n NVIDIA On-Demand\n\nSign Up for NVIDIA News\n\nFollow NVIDIA\n\nUSA - United States [...] ## Media Contacts\n\nGlobal contacts for media inquiries.\n\nAll Contacts\n\n## Stay Informed\n\nNewsroom updates delivered to your inbox.\n\nSubscribe\n\nCorporate Information\n\n About NVIDIA\n Corporate Overview\n Technologies\n NVIDIA Research\n Investors\n Social Responsibility\n NVIDIA Foundation\n\nGet Involved [...] # Statement From NVIDIA Board of Directors\n\nNovember 8, 2026\n\n  Statement From NVIDIA Board of Directors  \n\nThe NVIDIA Board is initiating an independent investigation in light of recent reporting that founder and CEO Jensen Huang has been the target of a foreign intelligence effort.\n\nA committee of independent directors, assisted by outside independent counsel, will oversee the investigation.",
+                "score": 0.013054842944201601
+              },
+              {
+                "title": "Nvidia",
+                "url": "https://tavily.com/knowledge/company/TXRhn2TKUD7t",
+                "source": "tavily.com",
+                "summary": "# NVIDIA\nID: TXRhn2TKUD7t\nWebsite: www.nvidia.com\nHeadquarters: Santa Clara, CA, United States\nLinkedIn: www.linkedin.com/company/nvidia · 6,301,389 followers\nIndustry: Computer Hardware Manufacturing\nIndustry codes: SIC 73, 737, NAICS 33, 334\nCompany type: Public Company\nFounded: 1993 [...] Founded: 1993\nSocial profiles: www.facebook.com/nvidia, www.facebook.com/nvidia.in/?brand_redir=8409118252#, www.twitter.com/nvidia, www.instagram.com/nvidia, www.instagram.com/nvidia/?hl=en, www.youtube.com/@nvidia, www.youtube.com/user/nvidia, www.youtube.com/watch?v=gsbi7fs8q30, www.youtube.com/watch?v=k6t4tusfz5c\nPhone: 1-408-486-2000 [...] Description: NVIDIA is a world leader in the field of artificial intelligence, specifically in the field of GPU. They focus on AI, HPC, gaming, creative design, autonomy vehicles, and robotics.",
+                "score": 0.012830892884984596
+              },
+              {
+                "title": "Nvidia stock falls amid probe into CEO’s relationship with Chinese spy",
+                "url": "https://www.nbcnews.com/business/markets/nvidia-stock-falls-probe-ceos-relationship-chinese-spy-rcna608290",
+                "source": "nbcnews.com",
+                "summary": "“A committee of independent directors, assisted by outside independent counsel, will oversee the investigation,” Nvidia said in a Sunday statement. “The Board prioritizes U.S. national and economic security, which is paramount to the interests of NVIDIA and its shareholders.”\n\nAn Nvidia spokesperson told NBC News that Huang was “committed to continuing to lead NVIDIA as CEO without interruption.” [...] Jensen Huang has become one of the main forces driving the global AI push while steering Nvidia to a market value of more than $4 trillion. Huang has led Nvidia since he founded it in 1993, so it would be a seismic change if he were to leave the role. [...] Nvidia’s peers, such as AMD, Qualcomm, Taiwan Semi and Intel, all rose along with the broader market. Nvidia was the biggest loser on the Dow, the Nasdaq 100 and S&P 500.\n\nWith so many outstanding questions about the Huang scandal, few major analysts that cover Nvidia had weighed in on Monday morning about what it could mean for the company’s future.\n\nBut those who did said it was a blemish on an otherwise sterling track record, which could spark even more investigations.",
+                "score": 0.011976283762270395
+              },
+              {
+                "title": "Nvidia CEO Jensen Huang admits affair, board to launch investigation",
+                "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-admits-affair-board-to-launch-investigation",
+                "source": "axios.com",
+                "summary": "The woman, Alice Huang, was recruited to seek information and potentially push for Nvidia's advanced chips to be made available in China, countering existing restrictions, the Times reported. \n\nWhat they're saying:\"Today's news will not slow NVIDIA. Jensen is committed to continuing to lead NVIDIA as CEO without interruption,\" John Rizzo, head of public policy communications at Nvidia said in a statement. [...] \"I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did.\"\n   Huang said he took \"full responsibility\" for his actions, adding that he had fallen short of his responsibilities to Nvidia's employees, board and shareholders.\n   \"Leading NVIDIA is the privilege of my life,\" Huang wrote. \"I am fully committed to NVIDIA and will work to earn back your confidence.\" [...] Driving the news: \"I owe my family and all of you an apology,\" Huang wrote in a draft email to Nvidia employees obtained by Axios.",
+                "score": 0.011672819057261995
+              },
+              {
+                "title": "Nvidia launches investigation into CEO’s alleged relationship with Chinese spy : NPR",
+                "url": "https://www.npr.org/2026/11/08/nx-s1-6034036/nvidia-launches-investigation-into-ceos-alleged-relationship-with-chinese-spy",
+                "source": "npr.org",
+                "summary": "In the statement announcing the investigation, Nvidia cited recent reporting by The New York Times, which alleges Nvidia CEO Jensen Huang was the target of a Chinese intelligence operation that sought to send advanced Nvidia AI chips to China.\n\n\"While the Board has no reason to believe that either national security or NVIDIA secrets were compromised, the Board's inquiry will examine all available information,\" the statement from the company's board of directors reads in part. [...] Nvidia dominates the global market for AI chips, and has seen explosive growth in recent years, as NPR has reported. The company started as a manufacturer of chips for computer graphics, which later turned out to be crucial for training artificial intelligence.\n\nNvidia's CEO and President Trump have repeatedly appeared in public together in recent years. According to Huang, Nvidia is helping to fund the construction of a new ballroom at the White House.",
+                "score": 0.01154741999576741
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_handle_mapping_new_person",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_handle_mapping",
+        "difficulty": "medium",
+        "what_it_tests": "Map một người nổi tiếng không có trong base (Satya Nadella → satyanadella), handle không có @, limit=3."
+      },
+      "input": "Cho mình 3 tweet mới nhất của Satya Nadella",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "satyanadella",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "satyanadella",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "satyanadella",
+            "limit": 3
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "satyanadella",
+            "items": [
+              {
+                "title": "RT @brijones: Finance teams help the business understand what's happening and decide what to do next. That takes experti",
+                "summary": "RT @brijones: Finance teams help the business understand what's happening and decide what to do next. That takes expertise, and a lot of ro…",
+                "url": "https://x.com/satyanadella/status/2115838593717731488",
+                "source": "@satyanadella",
+                "date": "Thu Oct 29 16:10:05 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 11,
+                  "views": "10597"
+                }
+              },
+              {
+                "title": "Just wrapped our earnings call. It was a fast start to our fiscal year.",
+                "summary": "Just wrapped our earnings call. It was a fast start to our fiscal year.\n\nMicrosoft Cloud revenue surpassed $63B, with growth accelerating to 30% YoY.\n\nLots of innovation as we build the new tech stack for the agentic wave. A few highlights:",
+                "url": "https://x.com/satyanadella/status/2115577764300693644",
+                "source": "@satyanadella",
+                "date": "Wed Oct 28 22:53:39 +0000 2026",
+                "metrics": {
+                  "favorites": 9305,
+                  "retweets": 585,
+                  "views": "1807043"
+                }
+              },
+              {
+                "title": "4/ When it comes to infrastructure, we have a fungible fleet that allows us to dynamically allocate capacity to the high",
+                "summary": "4/ When it comes to infrastructure, we have a fungible fleet that allows us to dynamically allocate capacity to the highest value opportunities across compute, data, Foundry, and Copilot.\n\nWe are bringing capacity online faster, and getting more from the infrastructure we already have.\n\nAzure growth was broad-based across enterprise and SMB, spanning both core cloud services and AI infra.\n\nI have never been more confident in the opportunity ahead of us.",
+                "url": "https://x.com/satyanadella/status/2115577772349518171",
+                "source": "@satyanadella",
+                "date": "Wed Oct 28 22:53:41 +0000 2026",
+                "metrics": {
+                  "favorites": 204,
+                  "retweets": 12,
+                  "views": "90020"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_out_of_scope_translation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_translation",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu dịch thuật ngoài phạm vi research → không gọi tool nào (đặc biệt không gọi send)."
+      },
+      "input": "Dịch giúp mình câu 'good morning' sang tiếng Nhật",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Câu \"good morning\" trong tiếng Nhật được dịch là \"おはようございます\" (ohayō gozaimasu).",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_top_and_limit_args",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Kết hợp 2 arg trong một câu: 'nổi bật nhất' → search_type=Top và '10 tweet' → limit=10."
+      },
+      "input": "Lấy 10 tweet nổi bật nhất về Gemini",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Top",
+              "limit": 10
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Top",
+              "limit": 10
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Gemini",
+            "search_type": "Top",
+            "limit": 10
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Gemini",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "Claude Fable 5.2 vs Claude Opus 5.5 vs Gemini 4 Carbon vs GPT-6 Astra ",
+                "summary": "Claude Fable 5.2 vs Claude Opus 5.5 vs Gemini 4 Carbon vs GPT-6 Astra \n\nThe first 4-way model comparison result is here. And it's totally insane. \n\nSame prompt: Dinosaur obstacle run.\n\nFable 5.2: 9.6/10 - 0h 45m 12s\nOpus 5.5: 8.6/10  - 1h 12m 30s\nGemini 4 Carbon: 8.3/10  - 1h 20m 15s\nGPT-6 Astra: 7.6/10  - 1h 35m 40s\n\nI know I say it every time, but this is a huge leap. A huge jump. \n\nFable takes the crown with an incredible 9.6, finishing significantly faster and dominating the obstacle course like a pro! \n\nThe future looks bright and amazing. \n\nWhat do you guys think?",
+                "url": "https://x.com/ridark_eth/status/2120170486353047588",
+                "source": "@ridark_eth",
+                "date": "Tue Nov 10 15:03:29 +0000 2026",
+                "metrics": {
+                  "favorites": 46,
+                  "retweets": 3,
+                  "views": "1224"
+                }
+              },
+              {
+                "title": "The moment you've been waiting 4…",
+                "summary": "The moment you've been waiting 4…\n\nOur new frontier model, Gemini 4 Argon, is rolling out now in the Gemini app to bring your most complex ideas into reality.\n\nSee how Gemini 4 Argon and our latest updates across the Gemini app help you get the most out of every prompt. 🧵",
+                "url": "https://x.com/GeminiApp/status/2110039322229649783",
+                "source": "@GeminiApp",
+                "date": "Tue Oct 13 16:05:51 +0000 2026",
+                "metrics": {
+                  "favorites": 7597,
+                  "retweets": 799,
+                  "views": "10451576"
+                }
+              },
+              {
+                "title": "Gemini Robotics 2.5 is here. 🤖",
+                "summary": "Gemini Robotics 2.5 is here. 🤖\n\nOur latest physical AI is able to learn hundreds of everyday skills - from folding laundry and serving pastries to autonomously sorting car parts on the factory floor.\n\nHere’s a snapshot of its capabilities 🧵",
+                "url": "https://x.com/GoogleDeepMind/status/2120169787896525104",
+                "source": "@GoogleDeepMind",
+                "date": "Tue Nov 10 15:00:42 +0000 2026",
+                "metrics": {
+                  "favorites": 1684,
+                  "retweets": 187,
+                  "views": "87152"
+                }
+              },
+              {
+                "title": "this is f*cking wild - one of these lions cost way more to make than the other.",
+                "summary": "this is f*cking wild - one of these lions cost way more to make than the other.\n\nsame prompt, two models, a lion clawing its way out of a carpet.\n\nClaude Fable 5.2 · Gemini 4 Argon\n\none went full cinema - glowing lava veins, a roar you can feel in your chest. the other stripped it down, darker, leaner.\n\nthe catch: the fancier the model, the more it burns to run. so I didn’t touch a thing and I’m not telling you which is which - you call it: which lion looks like the one actually worth paying for?\n\nFable or Gemini? drop your pick",
+                "url": "https://x.com/kinderlayer/status/2120112222227648957",
+                "source": "@kinderlayer",
+                "date": "Tue Nov 10 11:11:58 +0000 2026",
+                "metrics": {
+                  "favorites": 106,
+                  "retweets": 0,
+                  "views": "16920"
+                }
+              },
+              {
+                "title": "Google announced a new Gemini Robotics 2.5 model for physical AI. ",
+                "summary": "Google announced a new Gemini Robotics 2.5 model for physical AI. \n\n> This model was built with support from the Gemini 4 Argon model. \n\n> In a POC with Apptronik and Mercedes-Benz, Gemini Robotics 2.5 helped the Apollo 2 robot pick and organize car parts for assembly with 96% accuracy. https://t.co/KQ6Hf6cHKs",
+                "url": "https://x.com/testingcatalog/status/2120173652641476658",
+                "source": "@testingcatalog",
+                "date": "Tue Nov 10 15:16:04 +0000 2026",
+                "metrics": {
+                  "favorites": 133,
+                  "retweets": 11,
+                  "views": "6952"
+                }
+              },
+              {
+                "title": "Your creative vision shouldn't reset every time AI gets better.",
+                "summary": "Your creative vision shouldn't reset every time AI gets better.\n\nGoogle's Gemini Omni 1.2 Flash is becoming OptimAI Studio's default video model.\n\nLonger takes. Stronger consistency. More control.\n\nNext: more leading models through OptimAI Router.\n\n💡https://t.co/cwqgvhN3e7\n💡https://t.co/iOElyxKY00",
+                "url": "https://x.com/OptimaiNetwork/status/2120169728199278880",
+                "source": "@OptimaiNetwork",
+                "date": "Tue Nov 10 15:00:28 +0000 2026",
+                "metrics": {
+                  "favorites": 95,
+                  "retweets": 44,
+                  "views": "3038"
+                }
+              },
+              {
+                "title": "Today, we’re announcing Gemini for healthcare. ",
+                "summary": "Today, we’re announcing Gemini for healthcare. \n\nThis newest addition to our suite of purpose-built industry solutions extends the Gemini agent to health systems and health plans.\n\nLearn more → https://t.co/FxnlgR7uJv https://t.co/bn26OaVjHg",
+                "url": "https://x.com/googlecloud/status/2120141472636789026",
+                "source": "@googlecloud",
+                "date": "Tue Nov 10 13:08:12 +0000 2026",
+                "metrics": {
+                  "favorites": 620,
+                  "retweets": 62,
+                  "views": "27253"
+                }
+              },
+              {
+                "title": "I'm sharing with you one of the best papers I've read on Harness Engineering",
+                "summary": "I'm sharing with you one of the best papers I've read on Harness Engineering\n\nit takes apart Claude Code (Opus 5.5), Codex, Gemini CLI and more, and boils all of them down to one line:\n\nagent = model + harness\n\nwhat you take away:\n> what a harness is, in plain terms\n> how modern coding agents are built under the hood\n> the patterns they all share\n> the direction the whole field is moving\n> a checklist for building your own\n\nthe model collects the applause\nthe harness decides whether the agent actually works\n\nloop and graph engineering come next, and that part lives in my article below",
+                "url": "https://x.com/Mr_Buzzoni/status/2119730968437432423",
+                "source": "@Mr_Buzzoni",
+                "date": "Mon Nov 09 09:57:00 +0000 2026",
+                "metrics": {
+                  "favorites": 1301,
+                  "retweets": 162,
+                  "views": "86194"
+                }
+              },
+              {
+                "title": "Our strongest frontier model, Gemini 4 Carbon, is now available.",
+                "summary": "Our strongest frontier model, Gemini 4 Carbon, is now available.\n\nBuilt for deeply complex, long-horizon workflows that push a frontier model’s intelligence, Carbon delivers frontier performance in agentic workflows across complex knowledge work, software engineering and web development, cybersecurity, and scientific reasoning.\n\nWhile Gemini 4 Argon remains the ideal model for the majority of software engineering and knowledge work, Carbon steps in for your hardest tasks that push a model to its limits — from complex, multi-step debugging to open-ended scientific research.\n\nAvailable starting today:\n— Consumers: use it in the @GeminiApp and AI Mode in Search for Google AI Ultra subscribers\n— Developers and Enterprises: build via the API in @GoogleAIStudio and @AndroidStudio, Google @Antigravity for Google AI Ultra subscribers, and Gemini for business\n— Scientists and Researchers: apply for a chance to get 6 months free via @Antigravity\n— Cybersecurity Defenders: apply to join the Fairwind Program for access to Carbon for cyber\n\nWatch how Carbon brings reasoning and coding together, turning avian research into an interactive 3D simulation of a songbird’s vocal organ that synthesizes the sounds of six bird species live.",
+                "url": "https://x.com/GoogleAI/status/2120187753329791341",
+                "source": "@GoogleAI",
+                "date": "Tue Nov 10 16:12:06 +0000 2026",
+                "metrics": {
+                  "favorites": 54,
+                  "retweets": 7,
+                  "views": "4296"
+                }
+              },
+              {
+                "title": "The 7 Essential Layers of AI Agent Architecture",
+                "summary": "The 7 Essential Layers of AI Agent Architecture\n\nBuilding reliable AI agents requires more than LLMs and prompts.\n\nHere are 7 layers every AI engineer should know.\n\n01 - Models | Reasoning\nPower decisions and tool selection.\nGPT, Claude, Gemini, Mistral\n\n02 - Vector DB | Retrieval\nEnable semantic search and RAG.\nPinecone, Weaviate, Chroma, Redis\n\n03 - Frameworks | Integration\nConnect models, data, and tools.\nLangChain, LlamaIndex, Haystack\n\n04 - Orchestration | Execution\nManage workflows, state, and retries.\nLangGraph, CrewAI, OpenAI Agents SDK\n\n05 - APIs & Protocols | Connectivity\nEnable tool access and agent communication.\nMCP, A2A, REST, JSON-RPC\n\n06 - Infrastructure | Scaling\nHandle deployment and compute.\nDocker, Kubernetes, AWS ECS, Modal\n\n07 - Evaluation | Reliability\nMonitor accuracy, failures, latency, and cost.\nRAGAS, DeepEval, LangSmith, Langfuse\n\nKey Takeaway\nA working agent needs intelligence.\n\nA production-ready agent needs architecture, security, and continuous evaluation.\n\nWhich layer matters most in your AI projects?",
+                "url": "https://x.com/RishiUvaach/status/2120146965233107373",
+                "source": "@RishiUvaach",
+                "date": "Tue Nov 10 13:30:01 +0000 2026",
+                "metrics": {
+                  "favorites": 32,
+                  "retweets": 9,
+                  "views": "505"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_send_after_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "send_after_confirm",
+        "difficulty": "medium",
+        "what_it_tests": "Mặt còn lại của boundary: user đã xác nhận rõ ở lượt cuối → gọi send với confirmed=true, không hỏi lại lần nữa."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin 'AI hôm nay có 3 tin mới' lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Ừ, mình xác nhận, gửi đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "AI hôm nay có 3 tin mới",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "AI hôm nay có 3 tin mới",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_switch_to_hn",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_to_new_tool",
+        "difficulty": "hard",
+        "what_it_tests": "3 lượt: bỏ Twitter, chuyển sang Hacker News, giữ chủ đề Rust → hn_search(query=Rust)."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mọi người nói gì về Rust trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, chuyển sang xem trên Hacker News đi"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chủ đề Rust nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Rust"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Rust"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hn_search",
+          "args": {
+            "query": "Rust"
+          },
+          "result": {
+            "tool": "hn_search",
+            "query": "Rust",
+            "items": [
+              {
+                "title": "Why Discord is switching from Go to Rust",
+                "url": "https://blog.discordapp.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f",
+                "source": "news.ycombinator.com",
+                "summary": "1582 points, 642 comments",
+                "date": "2020-02-04T17:30:40Z"
+              },
+              {
+                "title": "Leaving Rust gamedev after 3 years",
+                "url": "https://loglog.games/blog/leaving-rust-gamedev/",
+                "source": "news.ycombinator.com",
+                "summary": "1484 points, 972 comments",
+                "date": "2024-04-26T17:33:56Z"
+              },
+              {
+                "title": "A half-hour to learn Rust",
+                "url": "https://fasterthanli.me/articles/a-half-hour-to-learn-rust",
+                "source": "news.ycombinator.com",
+                "summary": "1444 points, 330 comments",
+                "date": "2021-01-02T05:50:39Z"
+              },
+              {
+                "title": "Announcing Rust 1.0",
+                "url": "http://blog.rust-lang.org/2015/05/15/Rust-1.0.html",
+                "source": "news.ycombinator.com",
+                "summary": "1363 points, 306 comments",
+                "date": "2015-05-15T17:02:09Z"
+              },
+              {
+                "title": "CityBound – An open source city simulation game in Rust",
+                "url": "https://github.com/citybound/citybound",
+                "source": "news.ycombinator.com",
+                "summary": "1340 points, 264 comments",
+                "date": "2019-04-05T15:18:45Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_cancel_send_then_search",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel_action",
+        "difficulty": "hard",
+        "what_it_tests": "User huỷ hành động gửi ở lượt sau → không send, không hỏi xác nhận, chuyển sang lookup news week."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Khoan, đừng gửi nữa. Chỉ tìm tin AI tuần này thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "Voters deliver \"AI earthquake,\" rebuking tech and billionaires",
+                "url": "https://www.axios.com/2026/11/04/ai-data-center-election-slowdown",
+                "source": "axios.com",
+                "summary": "AI had its \"official debut\" as the biggest issue in American politics, former New York Assemblymember and RAISE Act author Alex Bores told Axios. \"AI is reaching into every part of our society and economy and it's now crystal clear it's impacting every part of our politics, too.\" [...] Voters showed deep distrust of the AI race Tuesday, approving dozens of data center moratoriums and electing a raft of candidates who favor slowing a $10 trillion buildout, including in Texas — the epicenter of the boom.\n\nWhy it matters: In an election that hinged on an affordability crisis for many Americans, voters made it clear they view Silicon Valley's AI ambitions not as a technological miracle, but as a resource-draining threat to their wallets and communities. [...] Democratic challengers successfully weaponized AI policy, ousting Republicans in Ohio, Wisconsin, Arizona and Pennsylvania.\n   Democratic groups had poured ads into these districts attacking GOP incumbents for a 2025 vote that would've neutered state AI legislation.\n   AI safety advocates won or were poised to win races on Tuesday that will expand their coalition in the new Congress, including Colorado's Manny Rutinel and Minnesota's Matt Little.",
+                "score": 0.31843266
+              },
+              {
+                "title": "Google to end search access for schools that block its AI tools, sparking backlash - CBS News",
+                "url": "https://www.cbsnews.com/news/google-search-access-schools-ai-tools",
+                "source": "cbsnews.com",
+                "summary": "#### Campaign texts, powered by AI: How new tech is shaping voter outreach\n\nA screenshot of a demo conversation with an AI chatbot powered by Convos.ai. \n\n#### Data center health worries animate midterm campaigns\n\nkff-data-centers.jpg \n\n#### Anthropic's IPO lists 93 pages of risks. What could go wrong?\n\nInside Anthropic Headquarters As It's Testing A Different Version Of Leadership \n\n#### Microsoft offers buyouts to 60,000 workers as it invests more in AI [...] \"Multiple courts have found Google liable for violating antitrust laws, and this latest move shows it remains unchastened,\" she added. \"As the public increasingly pushes back against the use of AI in schools, Google is making clear it will punish those who don't fall in line.\"\n\nEdited by\nAlain Sherter\n\n### AI: Artificial Intelligence More\n\n#### Marvell to acquire Lumentum in $115 billion AI connectivity deal\n\nMarvell Headquarters in Santa Clara, California",
+                "score": 0.30681825
+              },
+              {
+                "title": "Deconstructing the AI Trade: AI Builders, AI Supplies and AI Products!",
+                "url": "https://aswathdamodaran.substack.com/p/deconstructing-the-ai-trade-ai-builders",
+                "source": "aswathdamodaran.substack.com",
+                "summary": "With AI users, a mix of early adopters and experimenters, in a subset of industries where AI is viewed as having the most promise, will emerge. Given AI’s strengths, software businesses were among the first to be exposed to AI products, with consequences for competitive position and profitability, but AI agents also have found a foothold in white collar businesses. [...] AI users will find themselves on the receiving end of sales pitches for AI products and services, with the key selling point being improved productivity, with the warning included that not buying these products will put them at a disadvantage, relative to competitors. For AI to find its business feet, you need the customer base for AI products and services to become both wider (cutting across many different industries) and deeper (where customers spend far more on AI, on a repeat basis). [...] to show at the moment. Even if you take the ARR numbers that are being leaked by the lead players, the collective revenues from AI products and services right now is about $250 billion, a small number relative to what has been invested in the space. The entire AI ecosystem is built on the premise that this group will become much larger, both in terms of reach across businesses and money spent in the trillions of dollars.",
+                "score": 0.30173275
+              },
+              {
+                "title": "A single AI model simulates the behavior of many substances, from sliding sand to folding proteins | MIT News | Massachusetts Institute of Technology",
+                "url": "https://news.mit.edu/2026/single-ai-model-simulates-many-substances-behavior-1109",
+                "source": "news.mit.edu",
+                "summary": "Unified simulation\n\nFor this work, the researchers drew inspiration from world models. These powerful AI systems learn the rules that govern the physical world so they can predict how objects or environments will change over time in response to certain actions or conditions.\n\nThe researchers applied these concepts to develop a unified AI architecture that can simulate multiple types of physical phenomena. [...] ## More MIT News\n\nRobot serving a cup of coffee while being instructed not to spill on the laptop\n\n### AI-assisted learning platform helps robots reason beyond literal commands\n\nThe new approach, known as FLEX, could lead to more intuitive, interactive household and assistive robots.\n\nRead full story →\n\nMan wearing a T-shirt and safety goggles standing above a concrete beam in the lab, operating a bench-mounted laser tool scanning the concrete. [...] The system represents every material it simulates, from a dune of sand to a protein molecule, as tiny particles and predicts where those particles will move one step at a time. Because it learns the underlying dynamics rather than being programmed with an equation, the model can adapt to materials, forces, and environments it never encountered during training.",
+                "score": 0.2975827
+              },
+              {
+                "title": "IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation - Source",
+                "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                "source": "news.microsoft.com",
+                "summary": "“Clients are no longer looking for AI that simply helps people do the same work a little faster. They want to build an agentic business,” said Mohamad Ali, Senior Vice President and Head of IBM Consulting. “Microsoft and IBM are helping organizations bring human expertise and digital labor together in a way that can scale across the enterprise, to turn AI from a productivity aid into a real competitive advantage.” [...] “AI is evolving quickly, and our focus at SEI is on applying it with intention in ways that strengthen trust, enhance human decision-making and create meaningful value across our business,” said Sneha Shah, Chief AI Strategist and Head of SEI Next. “Our work with IBM Consulting and Microsoft is helping us explore how emerging capabilities could support critical processes and be responsibly scaled over time, with the goal to create better experiences for our employees and clients. By combining [...] “Enterprise AI will be won by organizations that can turn their data, industry expertise and AI into action,” said Rodrigo Kede Lima, President, Microsoft Frontier Company. “Together, Microsoft and IBM Consulting are bringing the best of our technology and expertise, to help customers move from AI ambition to business impact faster and with confidence.”",
+                "score": 0.285243
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_correction_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_timeframe_correction",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt sau sửa timeframe day → week, giữ query Apple và topic news."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin tức về Apple hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang cả tuần này nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Apple",
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Apple",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Apple",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Apple",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "Apple",
+                "url": "https://tavily.com/knowledge/company/eL7xXx9SgNQa",
+                "source": "tavily.com",
+                "summary": "# Apple\nID: eL7xXx9SgNQa\nWebsite: www.apple.com\nHeadquarters: Cupertino, California, United States\nLinkedIn: www.linkedin.com/company/apple · 18,387,330 followers\nIndustry: Computers and Electronics Manufacturing\nCompany type: Public Company\nFounded: 1976\nSocial profiles: www.facebook.com/apple, www.twitter.com/apple, www.instagram.com/apple, www.youtube.com/@apple\nPhone: 800-692-7753, 1-408-996-1010\nDescription: Apple is a company that offers a wide range of products and services. [...] ## Products and services\nKeywords: technology, machine learning software, apple, machine learning, innovative product development, world-class operations, retail, telephone support, career opportunities, services, innovation, products [...] - Q1, 2026: revenue 143.76B gross profit 69.23B EBIT 50.85B net income 42.10B EPS 2.8399999141693115 USD\n- FY, 2025: revenue 416.16B gross profit 195.20B EBIT 133.05B net income 112.01B EPS 7.460000038146973 USD\n- Q3, 2025: revenue 94.04B gross profit 43.72B EBIT 28.20B net income 23.43B EPS 1.5700000524520874 USD",
+                "score": 0.70944256
+              },
+              {
+                "title": "Apple warns of AI agents behave in 'unintended or unpredictable' ways",
+                "url": "https://www.cnbc.com/2026/11/03/apple-warns-of-ai-agents-behave-in-unintended-or-unpredictable-ways.html",
+                "source": "cnbc.com",
+                "summary": "Apple said in its annual financial filing on Tuesday that AI agents that can act in “unintended or unpredictable ways” could represent a threat to its business by opening the company up to lawsuits or hurting its reputation.\n\nThe new risk factors in Apple’s filing show the disruptive potential of AI agents, which have rapidly become top of mind for Silicon Valley’s most important companies. [...] “The Company’s ability to oversee and control third-party artificial intelligence agents and other technologies may be limited,” Apple warned in its filing.\n\nApple doesn’t currently have an agentic AI. But when new CEO John Ternus was asked on Monday’s earnings call about AI agents, he said that the company had “real room” to expand Siri’s capabilities. [...] “In addition, the Company is subject to the risks posed by ethical concerns and negative consumer perceptions related to automation, artificial intelligence and super intelligence, including perceived threats to safety or other societal harms or complications,” according to the filing.",
+                "score": 0.2980575
+              },
+              {
+                "title": "Where Will Apple Stock Be in 5 Years?",
+                "url": "https://finance.yahoo.com/markets/stocks/articles/where-apple-stock-5-years-171000266.html",
+                "source": "finance.yahoo.com",
+                "summary": "-4.11%\n\nIt looks like the market approves of Apple's (NASDAQ: AAPL) cautious artificial intelligence (AI) strategy. Shares have jumped 28% in 2026 (as of Nov. 4). The company currently has the world's highest market capitalization, as its valuation is $260 billion higher than Nvidia's. [...] Services, like iCloud, Apple Pay, Apple Music, and Apple TV, among others, will become a more important part of the story. Revenue here rose 9.8% year over year in the fourth quarter. The company's massive installed base of more than 2.5 billion devices gives it unrivaled distribution. The integration of AI into Apple's various offerings means that it's in an advantageous position to control how people interact with this new technology in their day-to-day lives. [...] While AI only seems to increase the pace at which companies must evolve, I believe Apple's core operations will remain unchanged in 2031. The business will continue to generate the bulk of its revenue from hardware devices, which represented 74% of sales in fiscal 2026 (ended Sept. 26). It's hard to envision a scenario in which the iPhone isn't Apple's main financial driver.",
+                "score": 0.29608452
+              },
+              {
+                "title": "Apple Store Subscription Sign-Up Controversy Exposed - MacRumors",
+                "url": "https://www.macrumors.com/2026/11/08/apple-store-subscription-controversy",
+                "source": "macrumors.com",
+                "summary": "Early Apple Black Friday Deals on Apple Watch, MacBook Air, and More\n\n1 day ago'Backglow' Lets You Customize New MacBook Pro's Glowing Apple Logo\n\n'Backglow' Lets You Customize New MacBook Pro's Glowing Apple Logo\n\n1 day agoTop Stories: Apple Product Launches, iOS 27.3 Beta, and More\n\nTop Stories: Apple Product Launches, iOS 27.3 Beta, and More\n\n2 days agoMore Fun iPhone Duo Apps: 30 New Picks to Try\n\nMore Fun iPhone Duo Apps: 30 New Picks to Try [...] 8.5-inch OLED display, A20 Pro chip, IP67 water and dust resistance, and a thinner and lighter design.\n\nimac 3 blue\n\nM6 iMac\n\nPre-order Now, Launches Nov 6\n\nSpec bump to the M6 chip.\n\nhomeview square sidebar\n\nApple HomeView\n\nPre-Order Now, Launches Nov 13\n\nApple's smart home hub with 7-inch square display, A18 chip with Siri AI support, and more.\n\n• Apple TV\n\n• iPhone 18\n\nSee full product calendar\n\n## Other Stories\n\nM5 MacBook Pro\n\nRIP, MacBook Ultra\n\n2 days ago by Joe Rossignol [...] iOS 27.2 Features\n\nSiri AI improvements, Suggestions in Messages, Apple Music rebrand, and more.\n\niPhone Duo New Features Feature\n\nJust Got an iPhone Duo? Try These Features First\n\nApple's iPhone Duo is in customers' hands, and our dedicated how-to series explains the new features worth trying first.\n\n• iPhone 18 Pro vs iPhone 16 Pro\n\n• iPhone 18 Pro: The New Features You Should Try First\n\n• iPhone Mirroring Not Working?\n\n• Apple Watch Series 12 vs Ultra 4\n\n• Apple Intelligence Guide",
+                "score": 0.26375863
+              },
+              {
+                "title": "Apple Explores Turning Siri AI Into ChatGPT Dots-Like Agent; iOS 28 Shake-Up",
+                "url": "https://www.bloomberg.com/news/newsletters/2026-11-08/apple-explores-turning-siri-ai-into-chatgpt-dots-like-agent-ios-28-shake-up",
+                "source": "bloomberg.com",
+                "summary": "Apple’s new CEO is pressing software chief Craig Federighi to take a more ambitious approach to AI as the company looks to transform Siri into an autonomous agent that can get things done for users. Also: The company shakes up its development strategy for iOS 28, and the new MacBook Pro goes on sale.\n\nLast week in _Power On_: Apple missed a chance to be revolutionary with the touch-screen MacBook Pro.\n\nBefore it's here, it's on the Bloomberg Terminal LEARN MORE\n\n[]( [...] Sign InSubscribe\n\nLive TV\n   Markets \n   Finance\n   Economics\n   Industries\n   Tech\n   Politics\n   Businessweek\n   Opinion\n   Video\n   More \n\nUS Edition\n\n[](\n\nSubscribe\n\nApple:\n\nEarnings\n\nTouch-Screen MacBook Pro\n\niPhone Duo Hits Stores\n\nHomeView Hub\n\nTrade Secret Fight\n\nNew CEO’s Overhaul Plans\n\nBack Forward\n\nNewsletter\n\nPower On\n\n# Apple CEO Presses Software Chief to Pursue More Ambitious AI Strategy\n\nThe company wants to turn Siri into a true AI agent.\n\nImage 1\n\nGift this article",
+                "score": 0.2523799
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_hn_limit_carryover",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_new_tool_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt cuối chỉ nói số lượng → carry nguồn Hacker News và chủ đề Python, limit=3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Hacker News có bài gì hay về Python không?"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 bài thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Python",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "Python",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hn_search",
+          "args": {
+            "query": "Python",
+            "limit": 3
+          },
+          "result": {
+            "tool": "hn_search",
+            "query": "Python",
+            "items": [
+              {
+                "title": "Uv is the best thing to happen to the Python ecosystem in a decade",
+                "url": "https://emily.space/posts/251023-uv",
+                "source": "news.ycombinator.com",
+                "summary": "2214 points, 1324 comments",
+                "date": "2025-10-29T18:57:29Z"
+              },
+              {
+                "title": "Sunsetting Python 2",
+                "url": "https://www.python.org/doc/sunset-python-2/",
+                "source": "news.ycombinator.com",
+                "summary": "1616 points, 704 comments",
+                "date": "2019-09-09T06:43:24Z"
+              },
+              {
+                "title": "Grumpy: Go running Python",
+                "url": "https://opensource.googleblog.com/2017/01/grumpy-go-running-python.html",
+                "source": "news.ycombinator.com",
+                "summary": "1411 points, 451 comments",
+                "date": "2017-01-04T17:00:39Z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

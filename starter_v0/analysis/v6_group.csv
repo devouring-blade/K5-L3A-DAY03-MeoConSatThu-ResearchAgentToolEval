@@ -1,0 +1,11 @@
+run_id,version,artifact_version,suite,case_id,is_multiturn,case_failure_type,observed_mismatch,expected_tool,actual_tool,passed,routing_correct,args_correct,failures
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G01_hn_search_routing,False,wrong_tool,,hn_search,hn_search,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G02_timeframe_month,False,wrong_arg_value,,lookup,lookup,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G03_handle_mapping_new_person,False,wrong_arg_value,,timeline,timeline,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G04_out_of_scope_translation,False,out_of_scope,,no_tool,,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G05_top_and_limit_args,False,wrong_arg_value,,social_search,social_search,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G06_send_after_confirmation,True,wrong_boundary,,send,send,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G07_switch_to_hn,True,wrong_tool,,hn_search,hn_search,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G08_cancel_send_then_search,True,wrong_boundary,,lookup,lookup,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G09_correction_timeframe,True,wrong_arg_value,,lookup,lookup,True,True,True,
+v6_B_group_openai_20261110T231630961584,v6,v6+p42e5c681c56c+t6b49ab049c21,group,G10_hn_limit_carryover,True,wrong_arg_value,,hn_search,hn_search,True,True,True,
