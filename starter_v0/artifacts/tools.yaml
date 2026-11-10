@@ -23,7 +23,7 @@ tools:
         question: {type: string, default: "", description: "Câu hỏi"}
         response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
         options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
-      required: [question]
+      required: [question, response_type]
 
   - name: timeline
     description: "Lấy các bài đăng gần đây."
@@ -35,7 +35,7 @@ tools:
       required: [screenname]
 
   - name: social_search
-    description: "Tìm trên mạng xã hội."
+    description: "Tìm bài đăng trên Twitter/X theo từ khóa hoặc chủ đề. Dùng khi user muốn biết mọi người nói gì trên Twitter/X. KHÔNG dùng khi user yêu cầu tìm trên web/tin tức, hoặc đã bảo bỏ Twitter."
     parameters:
       type: object
       properties:
@@ -45,15 +45,15 @@ tools:
       required: [query]
 
   - name: lookup
-    description: "Tra cứu thông tin trên internet."
+    description: "Tìm trên web: tin tức, thời sự, thông tin chung. Dùng khi user hỏi tin tức hoặc yêu cầu tìm trên web, kể cả khi trước đó đang tìm trên Twitter rồi user bảo chuyển sang web. KHÔNG dùng để tìm tweet (dùng social_search) hoặc đọc một URL cụ thể (dùng fetch)."
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Truy vấn"}
-        topic: {type: string, enum: [general, news], default: "general", description: "Phân loại"}
-        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Khoảng thời gian"}
+        query: {type: string, default: "", description: "chủ đề cốt lõi, ngắn gọn, tập trung vào tên của chủ thể đó, không thêm các từ nào khác ngoài tên của chủ thể, vấn đề."}
+        topic: {type: string, enum: [general, news], default: "general", description: "chọn general khi người dùng muốn tra cứu thông tin chung, news cho tin tức, thời sự"}
+        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "khung thời gian người ta muốn tìm, ngày, tuần, tháng, năm tương ứng với các giá trị được liệt kê"}
         max_results: {type: integer, default: 5, description: "Số kết quả"}
-      required: [query]
+      required: [query, topic]
 
   - name: fetch
     description: "Lấy nội dung từ một địa chỉ."
