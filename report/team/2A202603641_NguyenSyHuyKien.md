@@ -25,7 +25,7 @@ Làm một mình toàn bộ bài lab: fork và setup môi trường (venv, `.env
 ## 4. Bằng chứng
 
 - File: `starter_v0/artifacts/version_log.csv`, `starter_v0/runs/v0…v6_*.json`, `starter_v0/analysis/*.csv`, `starter_v0/tools/hn_search/`, `starter_v0/tests/test_tools_todo.py`, `starter_v0/data/eval_group.json`, `starter_v0/app.py`, `starter_v0/transcripts/ui_v6_openai_20261110T232124125281.transcript.json`
-- Commit: `59f5024` (v0–v5), `2712574` (v6: hn_search, test, eval nhóm), <commit UI + báo cáo>
+- Commit: `59f5024` (v0–v5), `2712574` (v6: hn_search, test, eval nhóm), 358f074
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả: dùng Claude để giải thích output eval và code chấm điểm, thảo luận nguyên nhân lỗi, gợi ý cấu trúc prompt/description, viết `hn_search`, unit test, eval case, `app.py` và nháp báo cáo. Tự kiểm tra bằng cách: đọc `failures`/`actual_tool_calls` trong run JSON trước khi kết luận; kiểm tra `+p`/`+t` trong `artifact_version` sau mỗi version; chạy `pytest` (71 passed, 0 failed); chạy lại eval để phân biệt cải thiện thật với dao động; tự chạy UI và xem tool call.
 
 ## 5. Tự đánh giá
